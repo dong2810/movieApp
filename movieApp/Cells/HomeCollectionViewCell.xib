@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HomeCollectionViewCell" customModule="movieApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="192"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="240" height="192"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="big_bang_theory" translatesAutoresizingMaskIntoConstraints="NO" id="njz-cp-PkZ">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="162"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fT0-SQ-lfn">
+                        <rect key="frame" x="0.0" y="171" width="240" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="0Ub-fI-ZoN"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="fT0-SQ-lfn" secondAttribute="trailing" id="1ye-yF-Kci"/>
+                <constraint firstItem="fT0-SQ-lfn" firstAttribute="top" secondItem="njz-cp-PkZ" secondAttribute="bottom" constant="9" id="5a2-Ge-Ksh"/>
+                <constraint firstAttribute="bottom" secondItem="fT0-SQ-lfn" secondAttribute="bottom" id="Kwm-wD-zxd"/>
+                <constraint firstAttribute="trailing" secondItem="njz-cp-PkZ" secondAttribute="trailing" id="erQ-wK-2ed"/>
+                <constraint firstItem="njz-cp-PkZ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="j40-5d-DUc"/>
+                <constraint firstItem="njz-cp-PkZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="jyj-CJ-zfu"/>
+                <constraint firstItem="fT0-SQ-lfn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="rvd-5x-dDr"/>
+            </constraints>
+            <size key="customSize" width="240" height="192"/>
+            <connections>
+                <outlet property="img" destination="njz-cp-PkZ" id="DJ8-aL-YzF"/>
+                <outlet property="movieName" destination="fT0-SQ-lfn" id="eD6-Io-WMP"/>
+            </connections>
+            <point key="canvasLocation" x="-172.46376811594203" y="85.714285714285708"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="big_bang_theory" width="768" height="1024"/>
+    </resources>
+</document>

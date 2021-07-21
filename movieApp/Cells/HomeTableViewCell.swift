@@ -7,10 +7,19 @@
 
 import UIKit
 
-class HomeTableViewCell: UITableViewCell {
+//protocol HomeTableViewCellDelegate: class {
+//    func didSelectCell(at: HomeTableViewCell)
+//}
+//typealias DidSelected = ((_ tableIndex: Int?, _ CollectionIndex: Int?) -> Void)
 
+class HomeTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var headerLabel: UILabel!
+    
+//    var didSelected: DidSelected?
+//    var index: Int?
+    
     
     var homeModel : [HomeModel]?{
         didSet{
@@ -68,6 +77,7 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     @IBAction func seeAllButton(_ sender: Any) {
+//        onClickSeeAll?(index)
     }
 }
 
@@ -90,16 +100,19 @@ extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             return CGSize(width: collectionView.frame.width / 3, height: collectionView.frame.height)
         }
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let storyboard:UIStoryboard = UIStoryboard(name: "Detail", bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-////        vc.img = homeModel?[indexPath.item].posterPath)
-//        vc.navigationController?.pushViewController(vc, animated: true)
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        let defaultUrl = "https://image.tmdb.org/t/p/w500"
+        let url = defaultUrl + (homeModel?[indexPath.item].posterPath)!
+        vc.imgDetailMovie = UIImageView(image: url)
+        vc.navigationController?.pushViewController(vc, animated: true)
+//        didSelected?(index, indexPath.row)
+    }
 }
 
 extension UIImageView {
-    func downloaded(from url: URL, contentMode mode: ContentMode = .scaleAspectFit) {
+    func downloaded(from url: URL, contentMode mode: ContentMode = .scaleAspectFill) {
         contentMode = mode
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard

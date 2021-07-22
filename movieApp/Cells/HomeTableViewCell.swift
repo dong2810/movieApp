@@ -7,21 +7,21 @@
 
 import UIKit
 
-//protocol HomeTableViewCellDelegate: class {
-//    func didSelectCell(at: HomeTableViewCell)
-//}
-//typealias DidSelected = ((_ tableIndex: Int?, _ CollectionIndex: Int?) -> Void)
+protocol HomeTableViewCellDelegate: class {
+    func didSelectMovie(homeModel: HomeModel)
+}
 
 class HomeTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var headerLabel: UILabel!
+    //IBOutlet
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var headerLabel: UILabel!
     
-//    var didSelected: DidSelected?
-//    var index: Int?
+    //variables
+    private weak var delegate: HomeTableViewCellDelegate?
+    var movie: HomeModel?
     
-    
-    var homeModel : [HomeModel]?{
+    var homeModel : [HomeModel] = []{
         didSet{
             collectionView.reloadData()
         }
@@ -83,7 +83,7 @@ class HomeTableViewCell: UITableViewCell {
 
 extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return homeModel?.count ?? 0
+        return homeModel.count 
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -91,9 +91,9 @@ extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
         else {
             return UICollectionViewCell()
         }
-        cell.movieName.text = homeModel?[indexPath.item].originalTitle
+        cell.movieName.text = homeModel[indexPath.item].originalTitle
         let defaultUrl = "https://image.tmdb.org/t/p/w500"
-        let url = defaultUrl + (homeModel?[indexPath.item].posterPath)!
+        let url = defaultUrl + (homeModel[indexPath.item].posterPath)!
         cell.img.downloaded(from: url)
         return cell
     }
@@ -101,13 +101,7 @@ extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
             return CGSize(width: collectionView.frame.width / 3, height: collectionView.frame.height)
         }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        let defaultUrl = "https://image.tmdb.org/t/p/w500"
-        let url = defaultUrl + (homeModel?[indexPath.item].posterPath)!
-        vc.imgDetailMovie = UIImageView(image: url)
-        vc.navigationController?.pushViewController(vc, animated: true)
-//        didSelected?(index, indexPath.row)
+        self.delegate?.didSelectMovie(homeModel: homeModel[indexPath.row])
     }
 }
 
@@ -129,6 +123,13 @@ extension UIImageView {
     func downloaded(from link: String, contentMode mode: ContentMode = .scaleAspectFit) {
         guard let url = URL(string: link) else { return }
         downloaded(from: url, contentMode: mode)
+    }
+}
+
+// chỗ này e chưa biết viết tiếp như nào
+extension HomeTableViewCell: HomeTableViewCellDelegate {
+    func didSelectMovie(homeModel: HomeModel) {
+        self.movie = homeModel
     }
 }
 

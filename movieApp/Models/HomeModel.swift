@@ -8,20 +8,20 @@
 import Foundation
 
 struct HomeModel: Decodable {
-    let adult: Bool
-    var backdropPath: String = ""
-    let id: Int
-    let mediaType: String
-    let originalLanguage: String
-    let originalTitle: String
-    let overview: String
-    let popularity: Float
-    let posterPath: String
-    let releaseDate: String
-    let title: String
-    let video: Bool
-    let voteAverage: Float
-    let voteCount: Int
+    let adult: Bool?
+    var backdropPath: String?
+    let id: Int?
+    let mediaType: String?
+    let originalLanguage: String?
+    let originalTitle: String?
+    let overview: String?
+    let popularity: Float?
+    let posterPath: String?
+    let releaseDate: String?
+    let title: String?
+    let video: Bool?
+    let voteAverage: Float?
+    let voteCount: Int?
 
     private enum CodingKeys: String, CodingKey {
         case adult

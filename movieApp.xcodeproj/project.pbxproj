@@ -51,6 +51,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		282FD02926A7CBF70010FC7B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		2843DFC4269B3AD8002FA99E = {
 			isa = PBXGroup;
 			children = (
@@ -70,12 +77,12 @@
 		2843DFCF269B3AD9002FA99E /* movieApp */ = {
 			isa = PBXGroup;
 			children = (
+				282FD02926A7CBF70010FC7B /* View */,
 				28903AD926A569F900177F80 /* Controller */,
 				28D38139269BE5A0006BBCD2 /* Models */,
 				28D38133269BE113006BBCD2 /* Cells */,
-				2843DFD0269B3AD9002FA99E /* AppDelegate.swift */,
 				2843DFD2269B3AD9002FA99E /* SceneDelegate.swift */,
-				28D3813D269BE670006BBCD2 /* Movie.json */,
+				2843DFD0269B3AD9002FA99E /* AppDelegate.swift */,
 				2843DFD6269B3AD9002FA99E /* Main.storyboard */,
 				2843DFD9269B3ADA002FA99E /* Assets.xcassets */,
 				2843DFDB269B3ADA002FA99E /* LaunchScreen.storyboard */,
@@ -107,6 +114,7 @@
 		28D38139269BE5A0006BBCD2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				28D3813D269BE670006BBCD2 /* Movie.json */,
 				28D3813A269BE625006BBCD2 /* HomeModel.swift */,
 			);
 			path = Models;

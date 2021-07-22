@@ -9,7 +9,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
+    
+    //variables
     var homeModel: [HomeModel] =  [HomeModel]()
     
     override func viewDidLoad() {
@@ -34,16 +37,7 @@ class ViewController: UIViewController {
 
                   }
             }
-//        print(homeModel.count ?? 0)
         }
-    
-    func moveOnMovieDetail(tindex: Int, cindex: Int){
-        guard let vc = storyboard?.instantiateViewController(identifier: "DetailViewController") as? DetailViewController
-        else {
-            return
-        }
-        navigationController?.pushViewController(vc, animated: true)
-    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -56,13 +50,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         else{
             return UITableViewCell()
         }
-        
-        cell.didSelected = {tabIndex, collIndex in
-            if let tabIndex = tabIndex, let collIndex = collIndex {
-                self.moveOnMovieDetail(tindex: tabIndex, cindex: collIndex)
-            }
-        }
         return cell
     }
 }
-

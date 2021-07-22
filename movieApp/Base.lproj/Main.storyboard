@@ -106,6 +106,7 @@
         <!--Navigation Controller-->
         <scene sceneID="XkL-Hq-s0k">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tfv-X4-Nua" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="y2X-xf-nre" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aYs-kf-lI3">
@@ -117,13 +118,13 @@
                         <segue destination="4df-KM-Oje" kind="relationship" relationship="rootViewController" id="UhK-x4-g0l"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tfv-X4-Nua" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="140.57971014492756" y="133.92857142857142"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="73K-as-RPp">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2sh-j7-pbD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="4df-KM-Oje" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="COn-zr-l6h"/>
@@ -136,7 +137,6 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="zdc-Ik-8DO"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2sh-j7-pbD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1050.7246376811595" y="133.92857142857142"/>
         </scene>

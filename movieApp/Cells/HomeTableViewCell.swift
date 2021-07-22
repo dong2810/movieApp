@@ -8,7 +8,7 @@
 import UIKit
 
 protocol HomeTableViewCellDelegate: class {
-    func didSelectMovie(homeModel: HomeModel)
+    func didSelectMovie(_ cell: HomeTableViewCell)
 }
 
 class HomeTableViewCell: UITableViewCell {
@@ -101,7 +101,10 @@ extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
             return CGSize(width: collectionView.frame.width / 3, height: collectionView.frame.height)
         }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.delegate?.didSelectMovie(homeModel: homeModel[indexPath.row])
+        if delegate != nil {
+            delegate?.didSelectMovie(self)
+        }
+//        print("abc")
     }
 }
 
@@ -127,11 +130,17 @@ extension UIImageView {
 }
 
 // chỗ này e chưa biết viết tiếp như nào
-extension HomeTableViewCell: HomeTableViewCellDelegate {
-    func didSelectMovie(homeModel: HomeModel) {
-        self.movie = homeModel
-    }
-}
+//extension HomeTableViewCell: HomeTableViewCellDelegate {
+//    func didSelectMovie(homeModel: HomeModel) {
+//        self.movie = homeModel
+//    }
+//     func prepare(for segue: UIStoryboardSegue, sender: Any?)
+//    {
+//        if segue.destination is DetailViewController {
+//            let vc = segue.destination as? DetailViewController
+//        }
+//    }
+//}
 
    
 

@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         loadJson()
+        tableView.delegate = self
         tableView.register(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: "HomeTableViewCell")
         tableView.dataSource = self
         tableView.delegate = self
@@ -51,5 +52,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         return cell
+    }
+}
+
+extension ViewController: HomeTableViewCellDelegate {
+    func didSelectMovie(_ cell: HomeTableViewCell) {
+        guard let vc = storyboard?.instantiateViewController(identifier: "DetailViewController") as? DetailViewController else { return  }
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol HomeTableViewCellDelegate: class {
-    func didSelectMovie(_ cell: HomeTableViewCell)
+    func didSelectMovie(_ cell: HomeTableViewCell, movie: HomeModel)
 }
 
 class HomeTableViewCell: UITableViewCell {
@@ -18,7 +18,7 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet private weak var headerLabel: UILabel!
     
     //variables
-    private weak var delegate: HomeTableViewCellDelegate?
+     weak var delegate: HomeTableViewCellDelegate?
     var movie: HomeModel?
     
     var homeModel : [HomeModel] = []{
@@ -102,7 +102,7 @@ extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
         }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if delegate != nil {
-            delegate?.didSelectMovie(self)
+            delegate?.didSelectMovie(self, movie: homeModel[indexPath.item])
         }
 //        print("abc")
     }

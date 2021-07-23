@@ -56,9 +56,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ViewController: HomeTableViewCellDelegate {
-    func didSelectMovie(_ cell: HomeTableViewCell, movie: HomeModel) {
+    func collectionView(collectionviewcell: HomeCollectionViewCell?, index: Int, didTappedInTableViewCell: HomeTableViewCell) {
         guard let vc = storyboard?.instantiateViewController(identifier: "DetailViewController") as? DetailViewController else { return  }
-        print(vc)
+        vc.homeModel = homeModel[index]
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

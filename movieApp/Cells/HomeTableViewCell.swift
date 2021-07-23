@@ -8,7 +8,7 @@
 import UIKit
 
 protocol HomeTableViewCellDelegate: class {
-    func didSelectMovie(_ cell: HomeTableViewCell, movie: HomeModel)
+    func collectionView(collectionviewcell: HomeCollectionViewCell?, index: Int, didTappedInTableViewCell: HomeTableViewCell)
 }
 
 class HomeTableViewCell: UITableViewCell {
@@ -18,7 +18,8 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet private weak var headerLabel: UILabel!
     
     //variables
-     weak var delegate: HomeTableViewCellDelegate?
+    weak var delegate: HomeTableViewCellDelegate?
+    
     var movie: HomeModel?
     
     var homeModel : [HomeModel] = []{
@@ -101,10 +102,9 @@ extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
             return CGSize(width: collectionView.frame.width / 3, height: collectionView.frame.height)
         }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if delegate != nil {
-            delegate?.didSelectMovie(self, movie: homeModel[indexPath.item])
-        }
-//        print("abc")
+        
+            let cell = collectionView.cellForItem(at: indexPath)
+        self.delegate?.collectionView(collectionviewcell: cell as? HomeCollectionViewCell, index: indexPath.item, didTappedInTableViewCell: self)
     }
 }
 
@@ -128,19 +128,6 @@ extension UIImageView {
         downloaded(from: url, contentMode: mode)
     }
 }
-
-// chỗ này e chưa biết viết tiếp như nào
-//extension HomeTableViewCell: HomeTableViewCellDelegate {
-//    func didSelectMovie(homeModel: HomeModel) {
-//        self.movie = homeModel
-//    }
-//     func prepare(for segue: UIStoryboardSegue, sender: Any?)
-//    {
-//        if segue.destination is DetailViewController {
-//            let vc = segue.destination as? DetailViewController
-//        }
-//    }
-//}
 
    
 

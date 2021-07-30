@@ -1,16 +1,28 @@
 PODS:
+  - AnimatedCollectionViewLayout (1.1.0)
+  - FSPagerView (0.8.3)
+  - HCSStarRatingView (1.5)
   - Kingfisher (6.3.0)
 
 DEPENDENCIES:
+  - AnimatedCollectionViewLayout
+  - FSPagerView
+  - HCSStarRatingView (~> 1.5)
   - Kingfisher
 
 SPEC REPOS:
   trunk:
+    - AnimatedCollectionViewLayout
+    - FSPagerView
+    - HCSStarRatingView
     - Kingfisher
 
 SPEC CHECKSUMS:
+  AnimatedCollectionViewLayout: 0c1a38c4be115c525c887be183fc91ef65737c5d
+  FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
+  HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
 
-PODFILE CHECKSUM: e7f424f3e6cb81ee7d48449595cc2a3d7ed34089
+PODFILE CHECKSUM: 824fedde4bc12ddfb9d74b64e075491a51dac4d9
 
 COCOAPODS: 1.10.1

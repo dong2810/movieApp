@@ -24,6 +24,10 @@ class HomeTableViewCell: UITableViewCell {
     
     var homeModel : [HomeModel] = []{
         didSet{
+            collectionView.delegate = self
+            collectionView.dataSource = self
+            collectionView.register(UINib(nibName: "HomeCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "HomeCollectionViewCell")
+            collectionView.register(UINib(nibName: "UpCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "UpCollectionViewCell")
             collectionView.reloadData()
         }
     }
@@ -32,9 +36,7 @@ class HomeTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         loadJson()
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(UINib(nibName: "HomeCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "HomeCollectionViewCell")
+        
         let url = URL(string: "https://image.tmdb.org/t/p/w500")
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
         
@@ -102,8 +104,7 @@ extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
             return CGSize(width: collectionView.frame.width / 3, height: collectionView.frame.height)
         }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-            let cell = collectionView.cellForItem(at: indexPath)
+        let cell = collectionView.cellForItem(at: indexPath)
         self.delegate?.collectionView(collectionviewcell: cell as? HomeCollectionViewCell, index: indexPath.item, didTappedInTableViewCell: self)
     }
 }
@@ -126,6 +127,11 @@ extension UIImageView {
     func downloaded(from link: String, contentMode mode: ContentMode = .scaleAspectFit) {
         guard let url = URL(string: link) else { return }
         downloaded(from: url, contentMode: mode)
+    }
+    
+    func imageFromServerURL(_ URLString: String, placeHolder: UIImage?) {
+        
+        self.kf.setImage(with: URL(string: URLString))
     }
 }
 

@@ -6,5 +6,10 @@ target 'movieApp' do
   use_frameworks!
 
   # Pods for movieApp
+
 pod "Kingfisher"
+pod 'FSPagerView'
+pod 'HCSStarRatingView', '~> 1.5'
+pod 'AnimatedCollectionViewLayout'
+
 end

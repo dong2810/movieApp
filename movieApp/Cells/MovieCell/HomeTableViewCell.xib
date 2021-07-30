@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tyd-DM-Zi3">
-                        <rect key="frame" x="0.0" y="0.0" width="494" height="51"/>
+                        <rect key="frame" x="0.0" y="9" width="494" height="51"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Now Playing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1e-vO-Jaj">
                                 <rect key="frame" x="12" y="9.5" width="93.5" height="21"/>
@@ -45,7 +45,7 @@
                         </constraints>
                     </view>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xlf-Hh-KFa">
-                        <rect key="frame" x="0.0" y="53" width="495" height="200"/>
+                        <rect key="frame" x="0.0" y="62" width="495" height="200"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="200" id="pqH-LY-NhY"/>
@@ -66,12 +66,13 @@
                     <constraint firstItem="xlf-Hh-KFa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="9ZS-Bt-Qru"/>
                     <constraint firstItem="Tyd-DM-Zi3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="D9R-LC-PYW"/>
                     <constraint firstAttribute="bottom" secondItem="xlf-Hh-KFa" secondAttribute="bottom" id="UAz-xG-yHg"/>
+                    <constraint firstItem="Tyd-DM-Zi3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="b0k-2f-gpx"/>
                     <constraint firstAttribute="trailing" secondItem="Tyd-DM-Zi3" secondAttribute="trailing" constant="1" id="rRi-A7-Aee"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="collectionView" destination="xlf-Hh-KFa" id="c4t-Gf-7BP"/>
+                <outlet property="collectionView" destination="xlf-Hh-KFa" id="ahD-qs-PS2"/>
                 <outlet property="headerLabel" destination="J1e-vO-Jaj" id="q2C-Pl-GO0"/>
             </connections>
             <point key="canvasLocation" x="-399.27536231884062" y="111.83035714285714"/>

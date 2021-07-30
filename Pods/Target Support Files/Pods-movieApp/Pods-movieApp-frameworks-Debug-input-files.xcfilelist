@@ -1,2 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-movieApp/Pods-movieApp-frameworks.sh
+${BUILT_PRODUCTS_DIR}/AnimatedCollectionViewLayout/AnimatedCollectionViewLayout.framework
+${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework
+${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework
 ${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework

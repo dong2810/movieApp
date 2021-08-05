@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 import HCSStarRatingView
 class DetailViewController: UIViewController {
-
+    
     //MARK: IBOutlet
     @IBOutlet weak var viewMovie: UIView!
     @IBOutlet private weak var imgDetail: UIImageView!

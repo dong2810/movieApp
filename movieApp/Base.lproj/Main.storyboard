@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="180" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G65-oH-v4p">
-                                <rect key="frame" x="15" y="97" width="384" height="707"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="180" estimatedSectionHeaderHeight="20" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G65-oH-v4p">
+                                <rect key="frame" x="15" y="88" width="384" height="716"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="Yng-7Q-3Qp"/>
@@ -28,14 +28,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="G65-oH-v4p" secondAttribute="trailing" constant="15" id="6np-AQ-05h"/>
-                            <constraint firstItem="G65-oH-v4p" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="15" id="Bkj-Ni-cfg"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="G65-oH-v4p" secondAttribute="trailing" constant="15" id="MEQ-Le-tiR"/>
-                            <constraint firstItem="G65-oH-v4p" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="OoC-LM-WE9"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="G65-oH-v4p" secondAttribute="trailing" constant="15" id="Sac-xo-V4e"/>
-                            <constraint firstItem="G65-oH-v4p" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="exH-b2-Fc5"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="G65-oH-v4p" secondAttribute="bottom" constant="9" id="jKL-ep-fMz"/>
-                            <constraint firstItem="G65-oH-v4p" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="9" id="tNw-7r-nnI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="G65-oH-v4p" secondAttribute="trailing" constant="15" id="9Ix-a6-n9r"/>
+                            <constraint firstItem="G65-oH-v4p" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="R3E-Ph-Zgm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="G65-oH-v4p" secondAttribute="bottom" constant="9" id="WIb-Z6-Z58"/>
+                            <constraint firstItem="G65-oH-v4p" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="qv5-8s-Cj1"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="NETFLIX" id="goX-6H-nMw">
@@ -201,7 +197,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.57637024150000005" green="1" blue="0.42146915210000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="0.57637024150000005" green="1" blue="0.42146915210000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.66336369943442486" green="0.87579314720812185" blue="0.47842047195474002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="selectedImageTintColor" red="1" green="0.1117940144" blue="0.050858188489999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
@@ -223,6 +219,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Std-JK-Dyo">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.13474039344989139" green="0.46632691235795382" blue="0.87579314720812185" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                             <color key="textColor" systemColor="systemPinkColor"/>

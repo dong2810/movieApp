@@ -10,7 +10,7 @@ import FSPagerView
 import Kingfisher
 
 class ViewController: UIViewController {
-   
+    
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!{
         didSet {
@@ -22,17 +22,38 @@ class ViewController: UIViewController {
     }
     
     //MARK: Variables
+    var filteredTableData = [HomeModel]()
+    var searchActive = false
+    var searchController = UISearchController(searchResultsController: nil)
+
     var homeModel: [HomeModel] =  [HomeModel]()
-    
+//    func configureSearch() {
+//        self.searchController = ({
+//            let searchController = UISearchController(searchResultsController: nil)
+//            searchController.searchResultsUpdater = self
+//            searchController.obscuresBackgroundDuringPresentation = false
+//            searchController.searchBar.placeholder = "Type name of movie"
+//            searchController.searchBar.sizeToFit()
+//            navigationItem.searchController = searchController
+//            definesPresentationContext = true
+//            return searchController
+//        })()
+//    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         loadJson()
+//        configureSearch()
+//        filteredTableData = homeModel
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+            return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -43,7 +64,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.delegate = self
         return cell
-        }
+        
+}
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let pagerView = FSPagerView()
@@ -90,10 +112,22 @@ extension ViewController: FSPagerViewDelegate, FSPagerViewDataSource {
         let defaultUrl = "https://image.tmdb.org/t/p/w500"
         let url = defaultUrl + (homeModel[index].posterPath ?? "")
         cell.imageView?.imageFromServerURL(url, placeHolder: nil)
-//        cell.textLabel?.text = (homeModel[index].title)!
-//        cell.textLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 15.0)
-//        cell.textLabel?.textAlignment = .center
-//        cell.textLabel?.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return cell
     }
 }
+
+//extension ViewController: UISearchResultsUpdating {
+//    func updateSearchResults(for searchController: UISearchController) {
+//        filteredTableData.removeAll(keepingCapacity: false)
+//        let searchString = searchController.searchBar.text!.uppercased()
+//
+//        for item in homeModel {
+//            if item.title?.uppercased().contains(searchString) == true {
+////                searchActive = true
+//                filteredTableData.append(item)
+//            }
+//        }
+//        self.tableView.reloadData()
+//    }
+//}
+

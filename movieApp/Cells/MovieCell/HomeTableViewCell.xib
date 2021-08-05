@@ -20,9 +20,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tyd-DM-Zi3">
                         <rect key="frame" x="0.0" y="9" width="494" height="51"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Now Playing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1e-vO-Jaj">
-                                <rect key="frame" x="12" y="9.5" width="93.5" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Now Playing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1e-vO-Jaj">
+                                <rect key="frame" x="12" y="15" width="93.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -30,15 +29,16 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cse-B4-tdd">
                                 <rect key="frame" x="435" y="10.5" width="47" height="30"/>
                                 <state key="normal" title="See All">
-                                    <color key="titleColor" systemColor="systemPinkColor"/>
+                                    <color key="titleColor" red="0.87579314720812185" green="0.32337234702077899" blue="0.5724117749132771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="seeAllButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8q9-WR-Cpm"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.79651796618710846" green="1" blue="0.45019012048719675" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.87579314720812185" green="0.70517834875840346" blue="0.57167618268583187" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="J1e-vO-Jaj" firstAttribute="centerY" secondItem="Tyd-DM-Zi3" secondAttribute="centerY" id="2w2-pn-vWz"/>
                             <constraint firstAttribute="trailing" secondItem="Cse-B4-tdd" secondAttribute="trailing" constant="12" id="QIw-Xb-jr8"/>
                             <constraint firstAttribute="height" constant="51" id="moq-xh-six"/>
                             <constraint firstItem="Cse-B4-tdd" firstAttribute="centerY" secondItem="Tyd-DM-Zi3" secondAttribute="centerY" id="oar-zG-B2I"/>
@@ -81,9 +81,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

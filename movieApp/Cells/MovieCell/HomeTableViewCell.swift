@@ -14,8 +14,8 @@ protocol HomeTableViewCellDelegate: class {
 class HomeTableViewCell: UITableViewCell, UISearchBarDelegate {
     
     //IBOutlet
-    @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var headerLabel: UILabel!
+    @IBOutlet public weak var collectionView: UICollectionView!
+    @IBOutlet public weak var headerLabel: UILabel!
     
     //variables
     weak var delegate: HomeTableViewCellDelegate?
@@ -24,6 +24,7 @@ class HomeTableViewCell: UITableViewCell, UISearchBarDelegate {
     var searchController = UISearchController(searchResultsController: nil)
     var filteredTableData = [HomeModel]()
     var searchActive = false
+    
     
     var homeModel : [HomeModel] = []{
         didSet{
@@ -35,26 +36,10 @@ class HomeTableViewCell: UITableViewCell, UISearchBarDelegate {
         }
     }
     
-    func configureSearch() {
-        self.searchController = ({
-            searchController.loadViewIfNeeded()
-            searchController.searchResultsUpdater = self
-            searchController.searchBar.delegate = self
-            searchController.obscuresBackgroundDuringPresentation = false
-            searchController.searchBar.enablesReturnKeyAutomatically = false
-            searchController.searchBar.returnKeyType = UIReturnKeyType.done
-            searchController.searchBar.placeholder = "Type name of movie"
-            searchController.searchBar.sizeToFit()
-            
-            return searchController
-        })()
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         loadJson()
-        configureSearch()
         let url = URL(string: "https://image.tmdb.org/t/p/w500")
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
@@ -104,12 +89,7 @@ class HomeTableViewCell: UITableViewCell, UISearchBarDelegate {
 
 extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if searchActive {
-            return filteredTableData.count
-        }
-        else {
             return homeModel.count
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -117,18 +97,10 @@ extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
         else {
             return UICollectionViewCell()
         }
-        if searchActive {
-            cell.movieName.text = filteredTableData[indexPath.item].originalTitle
-            let defaultUrl = "https://image.tmdb.org/t/p/w500"
-            let url = defaultUrl + (filteredTableData[indexPath.item].posterPath)!
-            cell.img.downloaded(from: url)
-        }
-        else {
             cell.movieName.text = homeModel[indexPath.item].originalTitle
             let defaultUrl = "https://image.tmdb.org/t/p/w500"
             let url = defaultUrl + (homeModel[indexPath.item].posterPath)!
             cell.img.downloaded(from: url)
-        }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

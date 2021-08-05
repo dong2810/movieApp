@@ -27,33 +27,40 @@ class ViewController: UIViewController {
     var searchController = UISearchController(searchResultsController: nil)
 
     var homeModel: [HomeModel] =  [HomeModel]()
-//    func configureSearch() {
-//        self.searchController = ({
-//            let searchController = UISearchController(searchResultsController: nil)
-//            searchController.searchResultsUpdater = self
-//            searchController.obscuresBackgroundDuringPresentation = false
-//            searchController.searchBar.placeholder = "Type name of movie"
-//            searchController.searchBar.sizeToFit()
-//            navigationItem.searchController = searchController
-//            definesPresentationContext = true
-//            return searchController
-//        })()
-//    }
+    var homeModels = [String].self {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    func configureSearch() {
+        self.searchController = ({
+            let searchController = UISearchController(searchResultsController: nil)
+            searchController.searchResultsUpdater = self
+            searchController.obscuresBackgroundDuringPresentation = false
+            searchController.searchBar.placeholder = "Type name of movie"
+            searchController.searchBar.sizeToFit()
+            tableView.tableHeaderView = searchController.searchBar
+            definesPresentationContext = true
+            navigationItem.hidesSearchBarWhenScrolling = false
+            return searchController
+        })()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         loadJson()
-//        configureSearch()
-//        filteredTableData = homeModel
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-        navigationItem.hidesSearchBarWhenScrolling = false
+        configureSearch()
     }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchActive {
+            return filteredTableData.count
+        }
+        else {
             return 2
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -116,18 +123,29 @@ extension ViewController: FSPagerViewDelegate, FSPagerViewDataSource {
     }
 }
 
-//extension ViewController: UISearchResultsUpdating {
-//    func updateSearchResults(for searchController: UISearchController) {
-//        filteredTableData.removeAll(keepingCapacity: false)
-//        let searchString = searchController.searchBar.text!.uppercased()
-//
-//        for item in homeModel {
-//            if item.title?.uppercased().contains(searchString) == true {
-////                searchActive = true
-//                filteredTableData.append(item)
-//            }
-//        }
-//        self.tableView.reloadData()
-//    }
-//}
-
+extension ViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchString = searchController.searchBar.text!
+        if !searchString.isEmpty {
+            searchActive = true
+            filteredTableData.removeAll()
+            for item in homeModel {
+                if item.title?.uppercased().contains(searchString.uppercased()) == true{
+                    filteredTableData.append(item)
+                }
+            }
+        }
+        else {
+            searchActive = false
+            filteredTableData.removeAll()
+            filteredTableData = homeModel
+        }
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false
+        filteredTableData.removeAll()
+        tableView.reloadData()
+    }
+}

@@ -10,11 +10,11 @@ import FSPagerView
 import Kingfisher
 
 class ViewController: UIViewController {
-    
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!{
         didSet {
             tableView.register(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: "HomeTableViewCell")
+            tableView.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
             tableView.dataSource = self
             tableView.delegate = self
             tableView.reloadData()
@@ -32,6 +32,13 @@ class ViewController: UIViewController {
             tableView.reloadData()
         }
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadJson()
+        configureSearch()
+    }
+    
     func configureSearch() {
         self.searchController = ({
             let searchController = UISearchController(searchResultsController: nil)
@@ -45,12 +52,6 @@ class ViewController: UIViewController {
             return searchController
         })()
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        loadJson()
-        configureSearch()
-    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -63,15 +64,33 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell") as? HomeTableViewCell
-        else{
-            return UITableViewCell()
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // Swift 4.2 onwards
+        if searchActive {
+            return 150
         }
-        cell.delegate = self
-        return cell
-        
+        return 250
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if searchActive {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell") as? SearchTableViewCell
+            else{
+                return UITableViewCell()
+            }
+            let url = URL(string: "https://image.tmdb.org/t/p/w500" + (filteredTableData[indexPath.row].backdropPath ?? ""))
+//            cell.delegate = self
+            cell.imgMovie.kf.setImage(with: url)
+            cell.movieName.text = filteredTableData[indexPath.row].title
+            return cell
+        }else{
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell") as? HomeTableViewCell
+            else{
+                return UITableViewCell()
+            }
+            cell.delegate = self
+            return cell
+        }
 }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -125,14 +144,17 @@ extension ViewController: FSPagerViewDelegate, FSPagerViewDataSource {
 
 extension ViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
+        print(searchActive)
         let searchString = searchController.searchBar.text!
         if !searchString.isEmpty {
             searchActive = true
             filteredTableData.removeAll()
             for item in homeModel {
                 if item.title?.uppercased().contains(searchString.uppercased()) == true{
-                    filteredTableData.append(item)
+                    filteredTableData = homeModel.filter({ $0.title!.contains(searchString) })
+                    print(item.title)
                 }
+                
             }
         }
         else {
@@ -140,8 +162,10 @@ extension ViewController: UISearchResultsUpdating {
             filteredTableData.removeAll()
             filteredTableData = homeModel
         }
+        
         tableView.reloadData()
     }
+        
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false

@@ -13,33 +13,35 @@ protocol HomeTableViewCellDelegate: class {
 
 class HomeTableViewCell: UITableViewCell, UISearchBarDelegate {
     
+    var vc = ViewController()
     //IBOutlet
     @IBOutlet public weak var collectionView: UICollectionView!
     @IBOutlet public weak var headerLabel: UILabel!
     
-    //variables
+    //variables 
     weak var delegate: HomeTableViewCellDelegate?
     
     var movie: HomeModel?
-    var searchController = UISearchController(searchResultsController: nil)
-    var filteredTableData = [HomeModel]()
-    var searchActive = false
-    
+    var searchController = ViewController().self.searchController
+    var filteredTableData = ViewController().self.filteredTableData
+    var searchActive = ViewController().self.searchActive
     
     var homeModel : [HomeModel] = []{
         didSet{
             collectionView.delegate = self
             collectionView.dataSource = self
             collectionView.register(UINib(nibName: "HomeCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "HomeCollectionViewCell")
-            collectionView.register(UINib(nibName: "UpCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "UpCollectionViewCell")
             collectionView.reloadData()
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         loadJson()
+        getURL()
+    }
+    
+    func getURL() {
         let url = URL(string: "https://image.tmdb.org/t/p/w500")
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
@@ -89,7 +91,12 @@ class HomeTableViewCell: UITableViewCell, UISearchBarDelegate {
 
 extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if searchActive {
+            return filteredTableData.count
+        }
+        else {
             return homeModel.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -97,10 +104,19 @@ extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
         else {
             return UICollectionViewCell()
         }
+        if searchActive{
+            cell.movieName.text = filteredTableData[indexPath.item].originalTitle
+            let defaultUrl = "https://image.tmdb.org/t/p/w500"
+            let url = defaultUrl + (filteredTableData[indexPath.item].posterPath)!
+            cell.img.downloaded(from: url)
+        }
+        else {
             cell.movieName.text = homeModel[indexPath.item].originalTitle
             let defaultUrl = "https://image.tmdb.org/t/p/w500"
             let url = defaultUrl + (homeModel[indexPath.item].posterPath)!
             cell.img.downloaded(from: url)
+        }
+        print(searchActive)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -137,34 +153,3 @@ extension UIImageView {
         self.kf.setImage(with: URL(string: URLString))
     }
 }
-
-extension HomeTableViewCell: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        //        filteredTableData.removeAll(keepingCapacity: false)
-        let searchString = searchController.searchBar.text!
-        if !searchString.isEmpty {
-            searchActive = true
-            filteredTableData.removeAll()
-            for item in homeModel {
-                if item.title?.uppercased().contains(searchString.uppercased()) == true{
-                    filteredTableData.append(item)
-                }
-            }
-        }
-        else {
-            searchActive = false
-            filteredTableData.removeAll()
-            filteredTableData = homeModel
-        }
-        collectionView.reloadData()
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false
-        filteredTableData.removeAll()
-        collectionView.reloadData()
-    }
-}
-
-
-

@@ -18,17 +18,16 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var ratingBar: HCSStarRatingView!
     
     // MARK: Varibales
-    var movieDetailName = ""
-    var overviewDetail = ""
-    var imgDetailMovie: UIImage!
-    var homeModel : HomeModel!
+    var homeModel : HomeModel?
+    
+    var currentIndex:Int = 0
+    
     override func viewDidLoad() {					
         super.viewDidLoad()
-        imgDetail.image = imgDetailMovie
-        movieName.text = movieDetailName
-        overview.text = overviewDetail
+        movieName.text = homeModel?.title
+        overview.text = homeModel?.overview
         let defaultUrl = "https://image.tmdb.org/t/p/w500"
-        let url = URL(string: defaultUrl + (homeModel.posterPath ?? ""))
+        let url = URL(string: defaultUrl + (homeModel?.posterPath ?? ""))
         imgDetail.kf.setImage(with: url)
         // Do any additional setup after loading the view.
     }

@@ -22,17 +22,18 @@ class ViewController: UIViewController {
     }
     
     //MARK: Variables
-    var filteredTableData = [HomeModel]()
+    var detail: HomeModel?
+    var filteredTableData: [HomeModel] = [HomeModel]()
     var searchActive = false
     var searchController = UISearchController(searchResultsController: nil)
-
+    
     var homeModel: [HomeModel] =  [HomeModel]()
     var homeModels = [String].self {
         didSet {
             tableView.reloadData()
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadJson()
@@ -65,11 +66,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // Swift 4.2 onwards
         if searchActive {
             return 150
         }
-        return 250
+        return 235
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -79,7 +79,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             let url = URL(string: "https://image.tmdb.org/t/p/w500" + (filteredTableData[indexPath.row].backdropPath ?? ""))
-//            cell.delegate = self
             cell.imgMovie.kf.setImage(with: url)
             cell.movieName.text = filteredTableData[indexPath.row].title
             return cell
@@ -91,7 +90,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             return cell
         }
-}
+    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let pagerView = FSPagerView()
@@ -101,29 +100,38 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         pagerView.transformer = FSPagerViewTransformer(type: .linear)
         self.view.addSubview(pagerView)
         return pagerView
-        }
+    }
+    
     func loadJson() {
-            if let path = Bundle.main.path(forResource: "Movie", ofType: "json") {
-                do {
-                    let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                    let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                    let jsonData = try JSONSerialization.data(withJSONObject: jsonResult, options: .prettyPrinted)
-                    let jsonDecoder = JSONDecoder()
-                    jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                     homeModel = try JSONDecoder().decode([HomeModel].self, from: jsonData)
-                  } catch {
-
-                  }
+        if let path = Bundle.main.path(forResource: "Movie", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                let jsonData = try JSONSerialization.data(withJSONObject: jsonResult, options: .prettyPrinted)
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                homeModel = try JSONDecoder().decode([HomeModel].self, from: jsonData)
+            } catch {
+                
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showdetail", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? DetailViewController{
+            destination.homeModel = filteredTableData[(tableView.indexPathForSelectedRow?.row)!]
+        }
+    }
 }
 
 extension ViewController: HomeTableViewCellDelegate {
     func collectionView(collectionviewcell: HomeCollectionViewCell?, index: Int, didTappedInTableViewCell: HomeTableViewCell) {
         guard let vc = storyboard?.instantiateViewController(identifier: "DetailViewController") as? DetailViewController else { return  }
         vc.homeModel = homeModel[index]
-        vc.movieDetailName = homeModel[index].originalTitle ?? ""
-        vc.overviewDetail = homeModel[index].overview ?? ""
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -144,7 +152,6 @@ extension ViewController: FSPagerViewDelegate, FSPagerViewDataSource {
 
 extension ViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        print(searchActive)
         let searchString = searchController.searchBar.text!
         if !searchString.isEmpty {
             searchActive = true
@@ -152,9 +159,7 @@ extension ViewController: UISearchResultsUpdating {
             for item in homeModel {
                 if item.title?.uppercased().contains(searchString.uppercased()) == true{
                     filteredTableData = homeModel.filter({ $0.title!.contains(searchString) })
-                    print(item.title)
                 }
-                
             }
         }
         else {
@@ -162,10 +167,8 @@ extension ViewController: UISearchResultsUpdating {
             filteredTableData.removeAll()
             filteredTableData = homeModel
         }
-        
         tableView.reloadData()
     }
-        
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false

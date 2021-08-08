@@ -40,7 +40,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="G65-oH-v4p" id="VaT-9V-Hnn"/>
-                        <segue destination="Vcw-f3-eSZ" kind="show" id="J7P-hd-XPi"/>
+                        <segue destination="Vcw-f3-eSZ" kind="show" identifier="showdetail" id="J7P-hd-XPi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

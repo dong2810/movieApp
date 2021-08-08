@@ -22,9 +22,6 @@ class HomeTableViewCell: UITableViewCell, UISearchBarDelegate {
     weak var delegate: HomeTableViewCellDelegate?
     
     var movie: HomeModel?
-    var searchController = ViewController().self.searchController
-    var filteredTableData = ViewController().self.filteredTableData
-    var searchActive = ViewController().self.searchActive
     
     var homeModel : [HomeModel] = []{
         didSet{
@@ -91,12 +88,7 @@ class HomeTableViewCell: UITableViewCell, UISearchBarDelegate {
 
 extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if searchActive {
-            return filteredTableData.count
-        }
-        else {
             return homeModel.count
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -104,19 +96,10 @@ extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
         else {
             return UICollectionViewCell()
         }
-        if searchActive{
-            cell.movieName.text = filteredTableData[indexPath.item].originalTitle
-            let defaultUrl = "https://image.tmdb.org/t/p/w500"
-            let url = defaultUrl + (filteredTableData[indexPath.item].posterPath)!
-            cell.img.downloaded(from: url)
-        }
-        else {
             cell.movieName.text = homeModel[indexPath.item].originalTitle
             let defaultUrl = "https://image.tmdb.org/t/p/w500"
             let url = defaultUrl + (homeModel[indexPath.item].posterPath)!
             cell.img.downloaded(from: url)
-        }
-        print(searchActive)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -11,5 +11,6 @@ pod "Kingfisher"
 pod 'FSPagerView'
 pod 'HCSStarRatingView', '~> 1.5'
 pod 'AnimatedCollectionViewLayout'
+pod 'RealmSwift', '~>10'
 
 end

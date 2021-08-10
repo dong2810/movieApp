@@ -60,13 +60,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		282FD02926A7CBF70010FC7B /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		2843DFC4269B3AD8002FA99E = {
 			isa = PBXGroup;
 			children = (
@@ -88,7 +81,6 @@
 		2843DFCF269B3AD9002FA99E /* movieApp */ = {
 			isa = PBXGroup;
 			children = (
-				282FD02926A7CBF70010FC7B /* View */,
 				28903AD926A569F900177F80 /* Controller */,
 				28D38139269BE5A0006BBCD2 /* Models */,
 				28D38133269BE113006BBCD2 /* Cells */,
